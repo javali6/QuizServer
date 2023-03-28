@@ -15,10 +15,14 @@ import java.util.ResourceBundle;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
 
-public class AppController implements Initializable {
-    private static final Integer PORT = 60669;
+public class AppController {
+    private static final Integer PORT = 4447;
     private List<String> listOfQuestions;
+    private ServerSocket serverSocket;
+    private Socket clientSocket;
+    private InternetConnection internetConnection;
 
+    BlockingQueue<String> blockingQueue;
     @FXML
     private Label answerLabel;
 
@@ -35,17 +39,22 @@ public class AppController implements Initializable {
     private Label timerLabel;
 
 
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-        try (ServerSocket serverSocket = new ServerSocket(PORT)) {
-            Socket clientSocket = serverSocket.accept();
-            BlockingQueue<String> blockingQueue = new ArrayBlockingQueue<>(3);
+    @FXML
+    public void initialize() {
+        try{
+            serverSocket = new ServerSocket(PORT);
+            clientSocket = serverSocket.accept();
+            System.out.println("Connected 46");
 
-            InternetConnection internetConnection = new InternetConnection(
-                    clientSocket, blockingQueue);
+            blockingQueue = new ArrayBlockingQueue<>(3);
+            System.out.println("Kolejka 49");
+            internetConnection = new InternetConnection(clientSocket, blockingQueue);
+            System.out.println("IC 52");
 
-            internetConnection.addToDeque(internetConnection.getTextFromClient());
             listOfQuestions = getQuestionsFromFile();
+            System.out.println("56 lista");
+
+            internetConnection.getTextFromClient();
 
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -54,6 +63,7 @@ public class AppController implements Initializable {
 
     @FXML
     void startGame(ActionEvent event) {
+        System.out.println("duppa");
         printQuestions(listOfQuestions);
 
     }

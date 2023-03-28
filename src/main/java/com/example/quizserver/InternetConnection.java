@@ -19,10 +19,11 @@ public class InternetConnection {
     }
 
     public String getTextFromClient() throws IOException {
-        InputStreamReader in = new InputStreamReader(clientSocket.getInputStream());
-        BufferedReader br = new BufferedReader(in);
+        InputStream inputStream = clientSocket.getInputStream();
+        DataInputStream dataInputStream = new DataInputStream(inputStream);
 
-        String text = br.readLine();
+        String text = dataInputStream.readUTF();
+        System.out.println("Odebrano: " + text);
         return text;
     }
 
