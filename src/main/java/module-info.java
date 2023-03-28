@@ -1,4 +1,4 @@
-module com.example.quizserver {
+module com.example.quizserverdwa {
     requires javafx.controls;
     requires javafx.fxml;
 
