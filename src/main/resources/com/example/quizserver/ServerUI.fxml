@@ -23,20 +23,11 @@
                         <Font name="System Bold" size="16.0" />
                      </font>
                   </Button>
-                  <Label fx:id="numberOfPlayers" layoutX="7.0" layoutY="22.0" prefHeight="18.0" prefWidth="85.0" text="liczba graczy" />
                </children>
             </AnchorPane>
          </top>
          <bottom>
-            <AnchorPane prefHeight="52.0" prefWidth="580.0" BorderPane.alignment="CENTER">
-               <children>
-                  <Label fx:id="timerLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="184.0" layoutY="5.0" prefHeight="39.0" prefWidth="213.0" text="TIME" textAlignment="CENTER">
-                     <font>
-                        <Font size="26.0" />
-                     </font>
-                  </Label>
-               </children>
-            </AnchorPane>
+            <AnchorPane prefHeight="52.0" prefWidth="580.0" BorderPane.alignment="CENTER" />
          </bottom>
          <center>
             <VBox prefHeight="235.0" prefWidth="580.0" BorderPane.alignment="CENTER">
