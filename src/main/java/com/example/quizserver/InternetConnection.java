@@ -7,7 +7,7 @@ import java.net.Socket;
 import java.util.concurrent.BlockingQueue;
 
 
-public class InternetConnection {
+public class InternetConnection implements Runnable{
 
     private Socket clientSocket;
 
@@ -31,4 +31,15 @@ public class InternetConnection {
         blockingQueue.add(text);
     }
 
+    @Override
+    public void run() {
+        try {
+            while (true) {
+                String text = getTextFromClient();
+                addToDeque(text);
+            }
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }
